@@ -1,32 +1,34 @@
-# One Click Checker K8s Systems
+# One Click Checker + K8s = ❤️
 
-Backend Application for One Click Checker site testing tool.
+> One Click Checker as Backend-System running in Kubernetes and base project and idea for following [Desktop Electron Application with improved functionality](https://github.com/TinkeringAround/occ).
 
 ## Test your Websites with 12 popular Testing Tools
 
-### Server
+```ts
+1. Server
 
 - SSLLabs
 - Security Headers
 - Hardenize
 
-### Performance
+2. Performance
 
 - Lighthouse
 - GTMetrix
 - KeyCDN
 
-### SEO & Accessibility
+3. SEO & Accessibility
 
 - Seobility
 - Varvy
 - AChecker
 
-### Optimization
+4. Optimization
 
 - Favicon-Checker
 - W3 HTML Validation
 - W3 CSS Validation
+```
 
 ## Architecture
 
@@ -34,4 +36,4 @@ Backend Application for One Click Checker site testing tool.
 
 ## Ressources
 
-Powered by Puppeteer!
+- Powered by [Puppeteer](https://github.com/puppeteer/puppeteer)!
