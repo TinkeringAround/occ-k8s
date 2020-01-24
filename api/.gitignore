@@ -1,0 +1,7 @@
+/node_modules
+*.png
+
+# Environment Files
+.env
+prod.env
+.prettierrc

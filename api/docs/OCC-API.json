@@ -1,0 +1,675 @@
+{
+	"info": {
+		"_postman_id": "b0a04b40-4664-43f7-a8f9-f676662f7162",
+		"name": "OCC-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users as Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/api/v1/users/",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User as Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"t.maier@gingco.net\",\n    \"password\": \"\",\n    \"permissions\": [\"admin\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{target}}/api/v1/users",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test@test.de\",\n    \"password\": \"123456\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/users/signup",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"signup"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "138"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8a-ynfCYsOdT4x+GS7ka85zecb7TRQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 Aug 2019 13:31:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User has been created.\",\n    \"data\": {\n        \"email\": \"test@test.de\",\n        \"userID\": \"5d56b0485a69192475ac8bd2\"\n    },\n    \"time\": \"2019-08-16T13:31:52.163Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "18db1b66-a394-4994-acb6-6ce422e8eb96",
+								"exec": [
+									"pm.test(\"200 LOGIN\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    var httpResponse = JSON.parse(responseBody);",
+									"    pm.environment.set(\"token\", httpResponse.data.token);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"t.maier@gingco.net\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{target}}/api/v1/users/login",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{target}}/api/v1/users/auth",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User (as Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"t.maier@gingco.net\",\n    \"password\": \"\",\n    \"permissions\": []\n}"
+						},
+						"url": {
+							"raw": "{{target}}/api/v1/users/5d92fa10bb2c4807382cd675",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"5d92fa10bb2c4807382cd675"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User  by userID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/api/v1/users/5d9469c671dd57126f05c7d4",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"5d9469c671dd57126f05c7d4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Create Report",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\": \"wuyou.de\",\n\t\"suites\": [\"securityheaders\", \"ssllabs\", \"seobility\", \"varvy-seo\", \"favicon-checker\", \"gtmetrix\", \"webhint\", \"hardenize\", \"lighthouse\", \"achecker\", \"w-three\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{target}}/api/v1/reports",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report  by reportID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/api/v1/reports/5d946a8f9a47cb1281606824",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"5d946a8f9a47cb1281606824"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Report  with reportID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3333/api/v1/reports/5d650f4ae48a8f1816b5fe9c",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3333",
+									"path": [
+										"api",
+										"v1",
+										"reports",
+										"5d650f4ae48a8f1816b5fe9c"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "100"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "91"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 Aug 2019 11:12:33 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1566905085"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "431"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1af-AXYblSi2Ag/mcWTeLfGb1Bb0RQk\""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Report successfully retrieved.\",\n    \"data\": {\n        \"report\": {\n            \"_id\": \"5d650f4ae48a8f1816b5fe9c\",\n            \"url\": \"gingco.net\",\n            \"reports\": [\n                {\n                    \"images\": [\n                        \"5d650f4f70225e17da8d2415\"\n                    ],\n                    \"name\": \"ssllabs\"\n                },\n                {\n                    \"images\": [\n                        \"5d650f5570225e17da8d2416\"\n                    ],\n                    \"name\": \"w-three\"\n                },\n                {\n                    \"images\": [\n                        \"5d650f5e70225e17da8d2417\"\n                    ],\n                    \"name\": \"securityheaders\"\n                },\n                {\n                    \"images\": [\n                        \"5d650f7370225e17da8d2418\"\n                    ],\n                    \"name\": \"lighthouse\"\n                }\n            ],\n            \"status\": \"FINISHED\",\n            \"createdAt\": \"Tue, 27 Aug 2019 11:08:58 GMT\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Report by reportID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/api/v1/reports/5d946a859a47cb1281606822",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"5d946a859a47cb1281606822"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/api/v1/reports/?sort=desc",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "100",
+									"description": "default: 20",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "desc",
+									"description": "asc or desc, default: asc"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "default: 1",
+									"disabled": true
+								},
+								{
+									"key": "url",
+									"value": "audibkk.de",
+									"disabled": true
+								},
+								{
+									"key": "tag",
+									"value": "private",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Report by reportID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"status\": \"FINISHED\",\n\t\"tag\": \"private\",\n\t\"reports\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{target}}/api/v1/reports/5d9458732788d40573f10a77",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"5d9458732788d40573f10a77"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "Image by imageID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/api/v1/images/5d946aa69a47cb1281606827",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"images",
+								"5d946aa69a47cb1281606827"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image by imageID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/api/v1/images/5d9449bb2788d40573f10a12",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"images",
+								"5d9449bb2788d40573f10a12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "suites",
+			"item": [
+				{
+					"name": "Supported Suites",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{target}}/api/v1/suites",
+							"host": [
+								"{{target}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"suites"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			}
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{target}}/api/v1",
+					"host": [
+						"{{target}}"
+					],
+					"path": [
+						"api",
+						"v1"
+					]
+				},
+				"description": "Health Path for Kubernetes"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "af8ec1c7-5764-4568-9798-531e583a62f2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "20d09ae4-d8fb-45f5-b7d6-de15143578fe",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "faee4f12-a8a5-467d-8fa7-25945da608d4",
+			"key": "target",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "faa38e86-d65c-47e4-a639-e66b70a18b56",
+			"key": "target",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	],
+	"protocolProfileBehavior": {}
+}

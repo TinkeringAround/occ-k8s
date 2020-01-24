@@ -1,0 +1,73 @@
+# Mongo PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: occ
+  name: occ-mongo-pvc
+  labels:
+    app: occ
+    tier: mongodb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ionos-enterprise-hdd
+---
+# Mongo Service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: occ
+  name: occ-mongo
+  labels:
+    app: occ
+    tier: mongodb
+spec:
+  ports:
+    - name: http
+      port: 27017
+      protocol: TCP
+      targetPort: 27017
+  selector:
+    app: occ
+    tier: mongodb
+---
+# Mongo Deployment
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  namespace: occ
+  name: occ-mongo
+spec:
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 0
+  template:
+    metadata:
+      labels:
+        app: occ
+        tier: mongodb
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: occ-mongo
+          image: mongo:4
+          ports:
+            - containerPort: 27017
+              name: http
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "200m"
+            limits:
+              memory: "1024Mi"
+              cpu: "800m"
+          volumeMounts:
+            - name: occ-mongo-pv
+              mountPath: /data/db
+      volumes:
+        - name: occ-mongo-pv
+          persistentVolumeClaim:
+            claimName: occ-mongo-pvc

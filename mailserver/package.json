@@ -1,0 +1,24 @@
+{
+  "name": "occ-mailserver",
+  "version": "1.0.0",
+  "description": "Mailserver for Oneclick-Checker. Supposed to talk Email Gateway with static IP, so that it can then be added to whitelist.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "build:image": "docker build -t mailserver .",
+    "push:image": "docker push mailserver"
+  },
+  "author": "Thomas Maier",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.16.4",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "sendmail": "^1.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

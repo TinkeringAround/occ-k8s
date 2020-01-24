@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: occ-mailserver
+  namespace: occ
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 3800
+  selector:
+    name: occ-mailserver
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: occ-mailserver
+  namespace: occ
+spec:
+  selector:
+    matchLabels:
+      name: occ-mailserver
+  strategy:
+    type: RollingUpdate
+  revisionHistoryLimit: 1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: occ-mailserver
+    spec:
+      imagePullSecrets:
+        - name: secret
+      containers:
+        - name: occ-mailserver
+          image: mailserver:IMAGE_TAG
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3800
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v1
+              port: 3800
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 10
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v1
+              port: 3800
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 10
+          resources:
+            requests:
+              memory: '32Mi'
+              cpu: '50m'
+            limits:
+              memory: '64Mi'
+              cpu: '100m'

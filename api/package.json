@@ -1,0 +1,39 @@
+{
+  "name": "occ-api",
+  "version": "1.0.0",
+  "description": "Server Tester REST API",
+  "main": "server.js",
+  "scripts": {
+    "build:image": "docker build -t api .",
+    "dev": "nodemon server.js",
+    "start:database": "docker-compose up occ-mongo occ-redis",
+    "start:environment": "docker-compose up",
+    "stop:environment": "docker-compose down",
+    "deploy:app": "kubectl apply -f deployment/app.yaml",
+    "deploy:mongo": "helm install --name occ-mongo --namespace occ -f deployment/values.yaml stable/mongodb-replicaset",
+    "deploy:ingress": "kubectl apply -f deployment/ingress.yaml"
+  },
+  "keywords": [
+    "node",
+    "api",
+    "rest"
+  ],
+  "author": "Thomas Maier",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-rate-limit": "^5.0.0",
+    "helmet": "^3.21.1",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.11",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

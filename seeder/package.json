@@ -1,0 +1,19 @@
+{
+  "name": "occ-seeder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "build:image": "docker build -t seeder:1 .",
+    "push:image": "docker push seeder:1",
+    "seed": "npm run build:image && npm run push:image && kubectl apply -f deployment/app.yaml"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.1.0",
+    "mongoose": "^5.7.1"
+  }
+}

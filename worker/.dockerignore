@@ -1,0 +1,5 @@
+node_modules
+.prettierrc
+deployment
+.env
+prod.env

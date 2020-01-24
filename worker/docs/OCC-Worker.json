@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "db0cb01b-ae8f-428b-91fa-c9c045185308",
+		"name": "OCC-Worker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{target}}/api/v1",
+					"host": [
+						"{{target}}"
+					],
+					"path": [
+						"api",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Job",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"reportID\": \"123456\",\n\t\"user\": \"test@test.de\",\n\t\"url\": \"gingco.net\",\n\t\"suites\": [\"securityheaders\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{target}}/api/v1/reports",
+					"host": [
+						"{{target}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"reports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Job",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{target}}/api/v1/reports/123456",
+					"host": [
+						"{{target}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"reports",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "19b07f62-31d6-4f34-b8f4-4e89eb9bdbf4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "31431e1a-df06-4b02-b74d-c99361d06bba",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "0caf9a5e-8f9a-4887-8651-f5d2da29bbba",
+			"key": "target",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "fa0218fa-b77c-4eeb-8ea8-fa32c3e3f05b",
+		"name": "OCC-Mailserver",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{target}}/api/v1/",
+					"host": [
+						"{{target}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Mail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"receiver\": \"t.maier@gingco.net\",\n\t\"subject\": \"Das ist eine Test-Mail\",\n\t\"content\": \"Das ist ein Test.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{target}}/api/v1/mails",
+					"host": [
+						"{{target}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"mails"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "73d5d950-73f5-44b2-8b57-dd4720f52c2f",
+			"key": "target",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

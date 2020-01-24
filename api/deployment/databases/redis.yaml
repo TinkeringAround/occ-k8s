@@ -1,0 +1,96 @@
+# Redis PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: occ
+  name: occ-redis-pvc
+  labels:
+    app: occ
+    tier: redisdb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: ionos-enterprise-hdd
+---
+# Redis Service
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: occ
+  name: occ-redis
+  labels:
+    app: occ
+    tier: redisdb
+spec:
+  ports:
+    - name: http
+      port: 6379
+      protocol: TCP
+      targetPort: 6379
+  selector:
+    app: occ
+    tier: redisdb
+---
+# Redis Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: occ
+  name: occ-redis
+  labels:
+    app: occ
+    tier: redisdb
+spec:
+  selector:
+    matchLabels:
+      app: occ
+      tier: redisdb
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 0
+  template:
+    metadata:
+      labels:
+        app: occ
+        tier: redisdb
+    spec:
+      containers:
+        - image: redis:alpine
+          name: occ-redis
+          command: ["sh", "-c", "rm -f /data/dump.rdb && redis-server"]
+          ports:
+            - containerPort: 6379
+              name: http
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          volumeMounts:
+            - name: occ-redis-pv
+              mountPath: /data
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "redis-cli -h $(hostname) ping"
+            initialDelaySeconds: 15
+            timeoutSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "redis-cli -h $(hostname) ping"
+            initialDelaySeconds: 20
+            periodSeconds: 3
+      volumes:
+        - name: occ-redis-pv
+          persistentVolumeClaim:
+            claimName: occ-redis-pvc
