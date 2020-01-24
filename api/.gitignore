@@ -5,3 +5,5 @@
 .env
 prod.env
 .prettierrc
+
+.DS*
