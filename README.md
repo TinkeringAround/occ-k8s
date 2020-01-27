@@ -36,13 +36,13 @@
 
 **Full JavaScript Stack:**
 
-|             | Tech-Stack            |
-| ----------- | --------------------- |
-| Frontend    | `Next + React`        |
-| REST API    | `Express`             |
-| Worker      | `Express + Puppeteer` |
-| Mailserver  | `Express`             |
-| Desktop App | `Electron + React`    |
+|                                                       | Tech-Stack            |
+| ----------------------------------------------------- | --------------------- |
+| Frontend                                              | `Next + React`        |
+| REST API                                              | `Express`             |
+| Worker                                                | `Express + Puppeteer` |
+| Mailserver                                            | `Express`             |
+| [Desktop App](https://github.com/TinkeringAround/occ) | `Electron + React`    |
 
 ## Ressources
 
