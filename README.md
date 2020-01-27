@@ -34,6 +34,16 @@
 
 ![Architecture Diagram](./ressources/architecture.png)
 
+**Full JavaScript Stack:**
+
+|             | Tech-Stack            |
+| ----------- | --------------------- |
+| Frontend    | `Next + React`        |
+| REST API    | `Express`             |
+| Worker      | `Express + Puppeteer` |
+| Mailserver  | `Express`             |
+| Desktop App | `Electron + React`    |
+
 ## Ressources
 
 - Powered by [Puppeteer](https://github.com/puppeteer/puppeteer)!
